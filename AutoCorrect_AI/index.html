@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeIQ - AI Resume Parser</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- PDF and DOCX reading libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="logo">Resume<span>IQ</span></div>
+        <div class="header-status">● Local Processing</div>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <p class="tagline">AI-ASSISTED HR TOOL</p>
+            <h1>Turn resumes into <span>structured data.</span></h1>
+            <p>Upload a resume and automatically extract candidate information, skills, education and experience.</p>
+        </section>
+
+        <section class="main-grid">
+
+            <!-- Upload section -->
+            <div class="card">
+
+                <h2>Upload Resume</h2>
+                <p class="subtitle">Choose a file to start parsing.</p>
+
+                <div class="dropzone" id="dropzone">
+
+                    <div class="upload-icon">↑</div>
+
+                    <h3>Drop your resume here</h3>
+
+                    <p>
+                        or
+                       <button
+    type="button"
+    id="browseBtn"
+    class="link-button"
+    onclick="document.getElementById('fileInput').click()">
+    browse files
+</button>
+                    </p>
+
+                    <div class="file-types">
+                        <span>PDF</span>
+                        <span>DOCX</span>
+                        <span>TXT</span>
+                    </div>
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept=".pdf,.docx,.txt"
+                        hidden
+                    >
+
+                </div>
+
+                <div id="fileInfo" class="file-info" hidden>
+                    <span id="fileName"></span>
+                    <button id="removeBtn">×</button>
+                </div>
+
+                <button id="parseBtn" class="primary-btn" disabled>
+                    Parse Resume →
+                </button>
+
+                <p class="privacy">
+                    Your document is processed locally in your browser.
+                </p>
+
+            </div>
+
+            <!-- Features -->
+            <div class="card">
+
+                <h2>What you'll get</h2>
+                <p class="subtitle">Key information organized automatically.</p>
+
+                <div class="feature">
+                    <div class="feature-icon purple">♙</div>
+                    <div>
+                        <h3>Candidate Profile</h3>
+                        <p>Name, email, phone and location.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon blue">⌘</div>
+                    <div>
+                        <h3>Skills Identification</h3>
+                        <p>Relevant technical skills detected.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon orange">▤</div>
+                    <div>
+                        <h3>Resume Sections</h3>
+                        <p>Education, experience and projects.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon green">↓</div>
+                    <div>
+                        <h3>Export Results</h3>
+                        <p>Download parsed details as JSON.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Results -->
+        <section id="results" hidden>
+
+            <div class="results-header">
+                <div>
+                    <p class="tagline">PARSING COMPLETE</p>
+                    <h2>Candidate Overview</h2>
+                </div>
+
+                <button id="downloadBtn" class="secondary-btn">
+                    ↓ Export JSON
+                </button>
+            </div>
+
+            <div class="results-grid">
+
+                <div class="card">
+                    <h3>Candidate Profile</h3>
+
+                    <div class="profile">
+                        <div id="initials" class="avatar">?</div>
+                        <h2 id="candidateName">Candidate</h2>
+                    </div>
+
+                    <div class="detail">
+                        <small>Email Address</small>
+                        <p id="candidateEmail">Not found</p>
+                    </div>
+
+                    <div class="detail">
+                        <small>Phone Number</small>
+                        <p id="candidatePhone">Not found</p>
+                    </div>
+
+                    <div class="detail">
+                        <small>Location</small>
+                        <p id="candidateLocation">Not found</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Detected Skills</h3>
+                    <div id="skillsList" class="skills-list"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Resume Sections</h3>
+                    <div id="sectionsList"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Extracted Text</h3>
+                    <button id="toggleText" class="link-button">
+                        Show Text
+                    </button>
+                    <pre id="rawText" hidden></pre>
+                </div>
+
+            </div>
+
+            <p class="disclaimer">
+                This is an educational prototype. Always verify extracted
+                information manually before using it in recruitment.
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer>
+        ResumeIQ | Student Project Prototype
+    </footer>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
